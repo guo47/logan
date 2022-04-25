@@ -37,13 +37,10 @@
 - (void)handleMethodCall:(FlutterMethodCall*)call result:(FlutterResult)result {
 	NSLog(@"call method %@ args=%@",call.method,call.arguments);
 	SEL sel = NSSelectorFromString([call.method stringByAppendingString:@":result:"]);
-	// 改为父类的类型，调用父类的set方法
-    Class newClass = [self class];
-    object_setClass(self, class_getSuperclass(newClass));
 	if(sel && [self respondsToSelector:sel]){
 		//((void(*)(id,SEL,...))objc_msgSend)(self,sel,call.arguments,result);
-		void (* function)(id,SEL,...) = (void (*) (id,SEL,...))objc_msgSend;
-        function(self, sel, call.arguments,result);
+        void (*doSomething)(id, SEL, NSDictionary *, FlutterResult) = (void (*)(id, SEL, NSDictionary *, FlutterResult))objc_msgSend;
+        doSomething(self, sel, call.arguments,result);
 	}else{
 		result(FlutterMethodNotImplemented);
 	}
