@@ -44,8 +44,8 @@
 	}
 }
 
-- (void)init:(NSDictionary *)args result:(FlutterResult)result{
-	if(![args isKindOfClass:[NSDictionary class]]){
+- (void)init:(NSMutableDictionary *)args result:(FlutterResult)result{
+	if(![args isKindOfClass:[NSMutableDictionary class]]){
 		result(@(NO));
 		return;
 	}
