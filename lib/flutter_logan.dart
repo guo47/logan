@@ -28,9 +28,9 @@ import 'package:flutter/services.dart';
 class FlutterLogan {
   static const MethodChannel _channel = const MethodChannel('flutter_logan');
 
-  static Future<bool> init(
-      String aseKey, String aesIv, int maxFileLen) async {
-    final bool result = await _channel.invokeMethod('init',{'aesKey': aseKey, 'aesIv': aesIv, 'maxFileLen': maxFileLen});
+  static Future<bool> init(String aseKey, String aesIv, int maxFileLen) async {
+    final bool result = await _channel.invokeMethod(
+        'init', {'aesKey': aseKey, 'aesIv': aesIv, 'maxFileLen': maxFileLen});
     return result;
   }
 
@@ -41,11 +41,20 @@ class FlutterLogan {
   static Future<String> getUploadPath(String date) async {
     final String result =
         await _channel.invokeMethod('getUploadPath', {'date': date});
-    return result.isNotEmpty?result:'';
+    return result.isNotEmpty ? result : '';
   }
 
-  static Future<bool> upload(String serverUrl, String date, String appId, String unionId, String deviceId) async {
-    final bool result = await _channel.invokeMethod('upload',{'date': date, 'serverUrl': serverUrl, 'appId': appId, 'unionId': unionId, 'deviceId': deviceId});
+  static Future<bool> upload(String serverUrl, String date, String appId,
+      String unionId, String deviceId, String sign, int timeStamp) async {
+    final bool result = await _channel.invokeMethod('upload', {
+      'date': date,
+      'serverUrl': serverUrl,
+      'appId': appId,
+      'unionId': unionId,
+      'deviceId': deviceId,
+      'sign': sign,
+      'stamp': timeStamp
+    });
     return result;
   }
 
