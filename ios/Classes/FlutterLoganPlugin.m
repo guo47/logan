@@ -103,6 +103,8 @@
 	NSString *appid = args[@"appId"];
 	NSString *unionId = args[@"unionId"];
 	NSString *deviceId = args[@"deviceId"];
+	NSString *sign = args[@"sign"];
+	NSString *stamp = args[@"stamp"];
 	loganUpload(urlStr,date,appid,unionId,deviceId,^(NSData *_Nullable data, NSURLResponse *_Nullable response, NSError *_Nullable error){
 		if(error){
 			result(@NO);
